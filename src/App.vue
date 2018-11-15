@@ -1,33 +1,49 @@
 <template lang="pug">
   #app
-    section.section
+    pm-header
+    pm-loader(v-show="isLoading")
+    section.section(v-show="!isLoading")
       nav.nav.has-shadow
         .container
           input.input.is-large(type="text",placeholder="Buscar canciones",v-model="searchQuery")
           a.button.is-info.is-large(@click="search") Buscar
           a.button.is-danger.is-large &times Cancelar
-          p
-            small {{searchMessage}}
+      .container
+        p
+          small {{searchMessage}}
 
       .container.results
-        .columns
-          .column(v-for="track in tracks") {{track.name}}-{{track.artist}}
+        .columns.is-multiline
+          .column.is-one-quarter(v-for="t in tracks")
+            pm-track(v-bind:track="t")
+
+    pm-footer
 
 
 </template>
 
 <script>
-  const tracks=[
-    {name:'muchacha',artist:'Espinetta'},
-    {name:'welcome jungle',artist:'GnR'},
-    {name:'Bohemian',artist:'Fredicito'}
-  ]
+import trackService from '@/services/track'
+import PmFooter from '@/components/layout/Footer.vue'
+import PmHeader from '@/components/layout/Header.vue'
+import PmTrack from '@/components/Track.vue'
+import PmLoader from '@/components/shared/Loader.vue'
+
+
+
 export default {
   name: 'app',
+  components:{
+    PmFooter,
+    PmHeader,
+    PmTrack,
+    PmLoader
+  },
   data () {
     return {
       searchQuery: '',
-      tracks:[]
+      tracks:[],
+      isLoading:false
     }
   },
   computed:{
@@ -37,10 +53,17 @@ export default {
   },
   methods:{
     search(){
-      this.tracks=tracks
+      if (this.searchQuery) {
+        this.isLoading=true
+        trackService.search(this.searchQuery)
+          .then(res => {
+            this.tracks = res.tracks.items
+            this.isLoading=false
+
+          })
+      }
     }
   }
-
 }
 </script>
 

@@ -1,15 +1,14 @@
-import platziMusicService from './platzi-music.js'
+import platziMusicService from './platzi-music'
 
 const trackService = {}
 
 trackService.search = function (q) {
   const type = 'track'
 
-  platziMusicService.get('/search', {
-    params: { q: q, type: type }
+  return platziMusicService.get('/search', {
+    params: { q, type }
   })
-    .then ( res => res.data)
-
+    .then(res => res.data)
 }
 
 export default trackService
