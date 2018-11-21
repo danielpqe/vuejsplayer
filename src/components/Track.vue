@@ -2,13 +2,13 @@
   .card
     .card-image
       figure.image.is-1by1
-        img(v-bind:src="track.album.images[0].url")
+        img(:src="track.album.images[0].url")
 
     .card-content
       .media
         .media-left
           figure.image.is-48x48
-            img(v-bind:src="track.album.images[0].url")
+            img(:src="track.album.images[0].url")
         .media-content
           p.title.is-6
             strong {{ track.name }}
@@ -19,22 +19,23 @@
         nav.level
           .level-left
             a.level-item
-              span.icon.is-small(v-on:click="selectTrack") Click
-
+              span.icon.is-small(@click="selectTrack") ▶️
 </template>
 
 <script>
   export default {
-    props:{
-      track:{
-        type:Object,
-        required:true
-      }
+    props: {
+      track: { type: Object, required: true }
     },
-    methods:{
-      selectTrack(){
-        this.$emit('select',this.track.id)
+
+    methods: {
+      selectTrack () {
+        this.$emit('select', this.track.id)
+        this.$bus.$emit('set-track', this.track)
       }
     }
   }
 </script>
+
+<style lang="css">
+</style>
