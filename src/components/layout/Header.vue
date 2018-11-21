@@ -5,13 +5,13 @@
         .container
           .nav-left
             .nav-item
-              strong 📻  Platzi Music
+              strong 📻  Vue JS Music
             .nav-right.nav-menu
 
     .hero-body
       .container.has-text-centered
-        h1.title Platzi Music
-        h2.subtitle Canciones que estan Vue-nisimas!
+        h1.title Vue JS Music
+        h2.subtitle Canciones de Spotify!
         pm-player
 </template>
 
@@ -21,4 +21,5 @@ import PmPlayer from '@/components/Player.vue'
 export default {
   components: { PmPlayer }
 }
+
 </script>

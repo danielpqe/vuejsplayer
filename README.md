@@ -1,6 +1,6 @@
-# platzi-music
+# vuejsplayer
 
-> App curso Vue.js de Platzi
+> An amazing vue js player
 
 ## Build Setup
 

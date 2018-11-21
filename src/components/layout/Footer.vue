@@ -2,5 +2,5 @@
   footer.footer
     .container
       .content.has-text-centered
-        p 💻 with ❤️ by @ianaya89
+        p 💻 with ❤️ by @danielpqe
 </template>
