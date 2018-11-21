@@ -1,7 +1,7 @@
 <template lang="pug">
   .card
     .card-image
-      figure.image.is-1buy1
+      figure.image.is-1by1
         img(v-bind:src="track.album.images[0].url")
 
     .card-content
@@ -19,7 +19,7 @@
         nav.level
           .level-left
             a.level-item
-              span.icon.is-small
+              span.icon.is-small(v-on:click="selectTrack") Click
 
 </template>
 
@@ -29,6 +29,11 @@
       track:{
         type:Object,
         required:true
+      }
+    },
+    methods:{
+      selectTrack(){
+        this.$emit('select',this.track.id)
       }
     }
   }
