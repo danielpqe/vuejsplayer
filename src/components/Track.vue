@@ -1,5 +1,5 @@
 <template lang="pug">
-  .card
+  .card(v-if="track && track.album")
     .card-image
       figure.image.is-1by1
         img(:src="track.album.images[0].url")
@@ -15,27 +15,27 @@
           p.subtitle.is-6 {{ track.artists[0].name }}
 
       .content
-        small {{ track.duration_ms }}
+        small {{ track.duration_ms | ms-to-mm }}
         nav.level
           .level-left
-            a.level-item
+            button.level-item.button.is-primary
               span.icon.is-small(@click="selectTrack") ▶️
+            button.level-item.button.is-warning
+              span.icon.is-small(@click="goToTrack") 🌎
 </template>
 
 <script>
-export default {
-  props: {
-    track: { type: Object, required: true }
-  },
+  import tracKMixin from '@/mixins/track'
 
-  methods: {
-    selectTrack () {
-      this.$emit('select', this.track.id)
-      this.$bus.$emit('set-track', this.track)
+export default {
+    mixins: [ tracKMixin ],
+    props: {
+      track: { type: Object, required: true }
+    },
+    methods: {
+      goToTrack (id) {
+        this.$router.push({name: 'track', params: {id: id}})
+      }
     }
-  }
 }
 </script>
-
-<style lang="css">
-</style>

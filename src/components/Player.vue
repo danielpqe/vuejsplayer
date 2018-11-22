@@ -1,28 +1,23 @@
 <template lang="pug">
   .content
     p.is-128x128
-      img(:src="track.album.images[0].url")
+      img(v-if="track && track.album", :src="track.album.images[0].url")
     p
       strong {{ track.name }}
-      small [{{ track.duration_ms }}]
+      small [{{ track.duration_ms | ms-to-mm }}]
     p
       audio(controls, :src="track.preview_url")
 </template>
 
 <script>
-export default {
+  import { mapState } from 'vuex'
 
-  data () {
-    return {
-      track: {}
+  export default {
+
+    computed: {
+      ...mapState(['track'])
+
     }
-  },
-
-  created () {
-    this.$bus.$on('set-track', (track) => {
-      this.track = track
-    })
-  }
 }
 </script>
 
