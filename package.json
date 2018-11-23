@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "bulma": "^0.4.3",
+    "serve": "^10.1.1",
     "trae": "^1.4.2",
     "vue": "^2.3.3",
     "vue-router": "^3.0.1",
